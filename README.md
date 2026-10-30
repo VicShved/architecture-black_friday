@@ -1,35 +1,44 @@
 # pymongo-api
 
+Проект с приложением на FastAPI, MongoDB с шардированием и репликацией,
+а также Redis для кеширования запросов.
+
+## Состав репозитория
+
+- `mongo-sharding` — папка с решением задания 2;
+- `mongo-sharding-repl` — папка с решением задания 3;
+- `sharding-repl-cache` — папка с решением заданий 2, 3 и 4; эта директория
+  используется для проверки финальной реализации;
+- [mongo-sharding.drawio](mongo-sharding.drawio) - схема по заданию 2
+- [mongo-sharding-repl.drawio](mongo-sharding-repl.drawio) - схема по залданию 3
+- [sharding-repl-cache.drawio](sharding-repl-cache.drawio) - схема по заданию 4 (основная)
+- [sharding-repl-cache-gateway.drawio](sharding-repl-cache-gateway.drawio) - схема по заданию 5
+- [sharding-repl-cache-gateway-cdn.drawio](sharding-repl-cache-gateway-cdn.drawio) - схема по заданию 6
+
 ## Как запустить
 
-Запускаем mongodb и приложение
+Для проверки используется директория `sharding-repl-cache`.
 
 ```shell
+cd sharding-repl-cache
 docker compose up -d
 ```
 
-Заполняем mongodb данными
+После запуска контейнеров выполните инициализацию и наполнение MongoDB:
 
 ```shell
 ./scripts/mongo-init.sh
 ```
 
+Скрипт настраивает шардирование и репликацию, после чего заполняет
+коллекцию `somedb.helloDoc` тестовыми документами (не менее 1000).
+
 ## Как проверить
 
-### Если вы запускаете проект на локальной машине
+Откройте приложение в браузере:
 
-Откройте в браузере http://localhost:8080
+- http://localhost:8080
 
-### Если вы запускаете проект на предоставленной виртуальной машине
+Swagger с доступными эндпоинтами:
 
-Узнать белый ip виртуальной машины
-
-```shell
-curl --silent http://ifconfig.me
-```
-
-Откройте в браузере http://<ip виртуальной машины>:8080
-
-## Доступные эндпоинты
-
-Список доступных эндпоинтов, swagger http://<ip виртуальной машины>:8080/docs
+- http://localhost:8080/docs
